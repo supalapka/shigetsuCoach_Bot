@@ -1,6 +1,7 @@
 ﻿using shigetsuCoach_Bot.Commands;
 using shigetsuCoach_Bot.Models;
 using shigetsuCoach_Bot.Models.Commands;
+using shigetsuCoach_Bot.Models.Contollers;
 using System;
 using System.Collections.Generic;
 using Telegram.Bot;
@@ -21,10 +22,12 @@ namespace shigetsuCoach_Bot
             client = new TelegramBotClient(ConfigSettings.Token);
 
             commandsList = new List<Command>();
-            // adding new command
+            // adding new commands
             commandsList.Add(new HelloCommand());
             commandsList.Add(new HelpCommand());
             commandsList.Add(new StartCommand());
+            commandsList.Add(new AboutCommand());
+
 
             client.StartReceiving();
 
@@ -54,34 +57,55 @@ namespace shigetsuCoach_Bot
                 }
 
 
-
                 if (!isCommand)
                     switch (msg.Text)
                     {
                         case "Про shigetsu":
-                            await client.SendPhotoAsync(
-                                 chatId: msg.Chat.Id,
-                                 photo: "https://i.imgur.com/4OeNGVj.jpg");
-                            await client.SendTextMessageAsync(msg.Chat.Id, "no name 7800 mmr player from india");
+                            msg.Text = "about";
+                            foreach (var command in commands)
+                            {
+                                if (command.Contains(msg.Text))
+                                {
+                                    command.Execute(msg, client);
+                                    isCommand = true;
+                                    break;
+                                }
+                            }
+                            break;
+                        case "Коучинг":
+                            CoachingController coachController = new CoachingController(msg, client);
+                            coachController.MainMenu();
                             break;
                         default:
-
-                            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..", replyMarkup: GetButtons());
+                            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..", replyMarkup: MainMenuButtons());
                             break;
                     }
             }
         }
 
-        private static IReplyMarkup GetButtons()
+
+        private static IReplyMarkup MainMenuButtons()
         {
             return new ReplyKeyboardMarkup
             {
                 Keyboard = new List<List<KeyboardButton>>
                 {
                     new List<KeyboardButton> { new KeyboardButton { Text = "Про shigetsu" }, new KeyboardButton { Text = "Коучинг" }},
-                    new List<KeyboardButton> { new KeyboardButton { Text = "Beta" },  new KeyboardButton { Text = "Пока" }}
+                  //  new List<KeyboardButton> { new KeyboardButton { Text = "Beta" },  new KeyboardButton { Text = "Пока" }}
                 }
             };
         }
+
+        //private static IReplyMarkup CoachingButtons()
+        //{
+        //    return new ReplyKeyboardMarkup
+        //    {
+        //        Keyboard = new List<List<KeyboardButton>>
+        //        {
+        //            new List<KeyboardButton> { new KeyboardButton { Text = "Про тренировку" }, new KeyboardButton { Text = "Назад" }},
+        //          //  new List<KeyboardButton> { new KeyboardButton { Text = "Beta" },  new KeyboardButton { Text = "Пока" }}
+        //        }
+        //    };
+        //}
     }
 }
