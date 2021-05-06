@@ -1,0 +1,87 @@
+﻿using shigetsuCoach_Bot.Commands;
+using shigetsuCoach_Bot.Models;
+using shigetsuCoach_Bot.Models.Commands;
+using System;
+using System.Collections.Generic;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+using Telegram.Bot.Types.ReplyMarkups;
+
+namespace shigetsuCoach_Bot
+{
+    class Program
+    {
+
+        private static List<Command> commandsList;
+        public static IReadOnlyList<Command> commands { get => commandsList.AsReadOnly(); }
+
+        private static TelegramBotClient client;
+        static void Main(string[] args)
+        {
+            client = new TelegramBotClient(ConfigSettings.Token);
+
+            commandsList = new List<Command>();
+            // adding new command
+            commandsList.Add(new HelloCommand());
+            commandsList.Add(new HelpCommand());
+            commandsList.Add(new StartCommand());
+
+            client.StartReceiving();
+
+            client.OnMessage += OnMessageHandler;
+
+            Console.ReadLine();
+            client.StopReceiving();
+
+        }
+
+        private static async void OnMessageHandler(object sender, MessageEventArgs e)
+        {
+            var msg = e.Message;
+            bool isCommand = false;
+            if (msg.Text != null)
+            {
+                Console.WriteLine($"message recieved: {msg.Text}");
+
+                foreach (var command in commands)
+                {
+                    if (command.Contains(msg.Text))
+                    {
+                        command.Execute(msg, client);
+                        isCommand = true;
+                        break;
+                    }
+                }
+
+
+
+                if (!isCommand)
+                    switch (msg.Text)
+                    {
+                        case "Про shigetsu":
+                            await client.SendPhotoAsync(
+                                 chatId: msg.Chat.Id,
+                                 photo: "https://i.imgur.com/4OeNGVj.jpg");
+                            await client.SendTextMessageAsync(msg.Chat.Id, "no name 7800 mmr player from india");
+                            break;
+                        default:
+
+                            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..", replyMarkup: GetButtons());
+                            break;
+                    }
+            }
+        }
+
+        private static IReplyMarkup GetButtons()
+        {
+            return new ReplyKeyboardMarkup
+            {
+                Keyboard = new List<List<KeyboardButton>>
+                {
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Про shigetsu" }, new KeyboardButton { Text = "Коучинг" }},
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Beta" },  new KeyboardButton { Text = "Пока" }}
+                }
+            };
+        }
+    }
+}
