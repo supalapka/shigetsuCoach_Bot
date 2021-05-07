@@ -12,6 +12,7 @@ namespace shigetsuCoach_Bot
 {
     class Program
     {
+        public static bool isMainMenu = true;
 
         private static List<Command> commandsList;
         public static IReadOnlyList<Command> commands { get => commandsList.AsReadOnly(); }
@@ -57,7 +58,7 @@ namespace shigetsuCoach_Bot
                 }
 
 
-                if (!isCommand)
+                if (!isCommand && isMainMenu)
                     switch (msg.Text)
                     {
                         case "Про shigetsu":
@@ -77,35 +78,11 @@ namespace shigetsuCoach_Bot
                             coachController.MainMenu();
                             break;
                         default:
-                            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..", replyMarkup: MainMenuButtons());
+                            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");
                             break;
                     }
             }
         }
 
-
-        private static IReplyMarkup MainMenuButtons()
-        {
-            return new ReplyKeyboardMarkup
-            {
-                Keyboard = new List<List<KeyboardButton>>
-                {
-                    new List<KeyboardButton> { new KeyboardButton { Text = "Про shigetsu" }, new KeyboardButton { Text = "Коучинг" }},
-                  //  new List<KeyboardButton> { new KeyboardButton { Text = "Beta" },  new KeyboardButton { Text = "Пока" }}
-                }
-            };
-        }
-
-        //private static IReplyMarkup CoachingButtons()
-        //{
-        //    return new ReplyKeyboardMarkup
-        //    {
-        //        Keyboard = new List<List<KeyboardButton>>
-        //        {
-        //            new List<KeyboardButton> { new KeyboardButton { Text = "Про тренировку" }, new KeyboardButton { Text = "Назад" }},
-        //          //  new List<KeyboardButton> { new KeyboardButton { Text = "Beta" },  new KeyboardButton { Text = "Пока" }}
-        //        }
-        //    };
-        //}
     }
 }

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -15,16 +14,30 @@ namespace shigetsuCoach_Bot.Models.Contollers
         {
             msg = _msg;
             client = _client;
+            client.OnMessage += OnMessageHandler;
         }
 
-        public CoachingController()  { }
+        private async void OnMessageHandler(object sender, MessageEventArgs e)
+        {
+            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");
+            switch (msg.Text)
+            {
+                case "Назад":
+                    Program.isMainMenu = true;
+                    await client.SendTextMessageAsync(msg.Chat.Id, "!!!!!!!!!!!!!!!!!!!!!");
+                    break;
+            }
+        }
+
+        public CoachingController() { } 
 
         public async void MainMenu()
         {
+            Program.isMainMenu = false;
             await client.SendTextMessageAsync(msg.Chat.Id, "Coaching", replyMarkup: CoachingButtons());
         }
 
-        private static IReplyMarkup CoachingButtons()
+        public static IReplyMarkup CoachingButtons()
         {
             return new ReplyKeyboardMarkup
             {
@@ -33,6 +46,10 @@ namespace shigetsuCoach_Bot.Models.Contollers
                     new List<KeyboardButton> { new KeyboardButton { Text = "Про тренировку" }, new KeyboardButton { Text = "Назад" }},
                 }
             };
+        }
+        ~CoachingController()
+        {
+            Program.isMainMenu = true;
         }
     }
 }
