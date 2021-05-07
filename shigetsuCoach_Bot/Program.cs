@@ -23,7 +23,7 @@ namespace shigetsuCoach_Bot
         private static TelegramBotClient client;
 
 
-        static async Task Main(string[] args)
+        public static async Task Main()
         {
             client = new TelegramBotClient(ConfigSettings.Token);
 
@@ -36,7 +36,7 @@ namespace shigetsuCoach_Bot
 
 
             client.StartReceiving();
-            client.OnMessage += OnMessageHandler;
+            client.OnMessage += BotOnMessageReceived;
 
             //  Console.ReadLine();
             while (botWorks)  { }
@@ -46,7 +46,7 @@ namespace shigetsuCoach_Bot
 
         }
 
-        private static async void OnMessageHandler(object sender, MessageEventArgs e)
+        private static async void BotOnMessageReceived(object sender, MessageEventArgs e)
         {
             var msg = e.Message;
             bool isCommand = false;
@@ -80,10 +80,46 @@ namespace shigetsuCoach_Bot
                                 }
                             }
                             break;
+
                         case "Коучинг":
-                            CoachingController coachController = new CoachingController(msg, client);
-                            coachController.MainMenu();
+                            msg.Text = "coaching";
+                            foreach (var command in commands)
+                            {
+                                if (command.Contains(msg.Text))
+                                {
+                                    command.Execute(msg, client);
+                                    isCommand = true;
+                                    break;
+                                }
+                            }
                             break;
+
+                        case "a":
+                            msg.Text = "a";
+                            foreach (var command in commands)
+                            {
+                                if (command.Contains(msg.Text))
+                                {
+                                    command.Execute(msg, client);
+                                    isCommand = true;
+                                    break;
+                                }
+                            }
+                            break;
+
+                        case "b":
+                            msg.Text = "b";
+                            foreach (var command in commands)
+                            {
+                                if (command.Contains(msg.Text))
+                                {
+                                    command.Execute(msg, client);
+                                    isCommand = true;
+                                    break;
+                                }
+                            }
+                            break;
+
                         default:
                             await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");
                             break;
