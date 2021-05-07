@@ -4,6 +4,7 @@ using shigetsuCoach_Bot.Models.Commands;
 using shigetsuCoach_Bot.Models.Contollers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -13,12 +14,16 @@ namespace shigetsuCoach_Bot
     class Program
     {
         public static bool isMainMenu = true;
+        public static  bool botWorks = true;
+
 
         private static List<Command> commandsList;
         public static IReadOnlyList<Command> commands { get => commandsList.AsReadOnly(); }
 
         private static TelegramBotClient client;
-        static void Main(string[] args)
+
+
+        static async Task Main(string[] args)
         {
             client = new TelegramBotClient(ConfigSettings.Token);
 
@@ -31,11 +36,13 @@ namespace shigetsuCoach_Bot
 
 
             client.StartReceiving();
-
             client.OnMessage += OnMessageHandler;
 
-            Console.ReadLine();
+            //  Console.ReadLine();
+            while (botWorks)  { }
             client.StopReceiving();
+
+
 
         }
 

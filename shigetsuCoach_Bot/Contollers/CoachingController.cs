@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using shigetsuCoach_Bot.Contollers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
@@ -8,23 +10,35 @@ namespace shigetsuCoach_Bot.Models.Contollers
 {
     public class CoachingController
     {
+        public static bool coachControllerWork = true;
         Message msg;
         TelegramBotClient client;
         public CoachingController(Message _msg, TelegramBotClient _client)
         {
             msg = _msg;
             client = _client;
+
+            client.StartReceiving();
             client.OnMessage += OnMessageHandler;
+            client.StopReceiving();
+
         }
 
         private async void OnMessageHandler(object sender, MessageEventArgs e)
         {
-            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");
+            msg = e.Message;
+            System.Console.WriteLine($"message recieved: {msg.Text}");
             switch (msg.Text)
             {
                 case "Назад":
                     Program.isMainMenu = true;
-                    await client.SendTextMessageAsync(msg.Chat.Id, "!!!!!!!!!!!!!!!!!!!!!");
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Main menu:",replyMarkup:MainMenuController.MainMenuButtons());
+                    coachControllerWork = false;
+                    client.StopReceiving();
+                    break;
+                default:
+                    await client.SendTextMessageAsync(msg.Chat.Id, "CoachController: developing..");
+                    client.StopReceiving();
                     break;
             }
         }
