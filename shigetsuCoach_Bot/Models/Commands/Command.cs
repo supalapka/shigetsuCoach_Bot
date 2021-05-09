@@ -9,6 +9,7 @@ namespace shigetsuCoach_Bot.Commands
         public abstract void Execute(Message msg, TelegramBotClient client);
         public bool Contains(string command)
         {
+
             return command.Contains(this.Name);
         }
     }

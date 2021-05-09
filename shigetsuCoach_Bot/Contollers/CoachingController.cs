@@ -33,7 +33,8 @@ namespace shigetsuCoach_Bot.Models.Contollers
                 case "Назад":
                     Program.isMainMenu = true;
                     //await client.SendTextMessageAsync(msg.Chat.Id, "Main menu:",replyMarkup:MainMenuController.MainMenuButtons());
-                    MainMenuController.MainMenuButtons();
+                    MainMenuController mainMenuController = new MainMenuController(msg, client);
+                    mainMenuController.MainMenuButtons();
                     coachControllerWork = false;
                     client.StopReceiving();
                     break;

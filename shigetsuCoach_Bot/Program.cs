@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace shigetsuCoach_Bot
@@ -22,8 +23,7 @@ namespace shigetsuCoach_Bot
 
         private static TelegramBotClient client;
 
-
-        public static async Task Main()
+            public static async Task Main()
         {
             client = new TelegramBotClient(ConfigSettings.Token);
 
@@ -37,13 +37,27 @@ namespace shigetsuCoach_Bot
 
             client.StartReceiving();
             client.OnMessage += BotOnMessageReceived;
+            client.OnCallbackQuery += BotOnCallBackQueryAsync;
 
             //  Console.ReadLine();
             while (botWorks)  { }
             client.StopReceiving();
+        }
 
+        private static async void BotOnCallBackQueryAsync(object sender, CallbackQueryEventArgs e)
+        {
+            var callback = e.CallbackQuery.Data;
+            var msg = e.CallbackQuery.Message;
 
-
+            foreach (var command in commands)
+            {
+                if (command.Contains(callback))
+                {
+                    command.Execute(msg, client);
+                    //isCommand = true;
+                    break;
+                }
+            }
         }
 
         private static async void BotOnMessageReceived(object sender, MessageEventArgs e)
@@ -81,44 +95,44 @@ namespace shigetsuCoach_Bot
                             }
                             break;
 
-                        case "Коучинг":
-                            msg.Text = "coaching";
-                            foreach (var command in commands)
-                            {
-                                if (command.Contains(msg.Text))
-                                {
-                                    command.Execute(msg, client);
-                                    isCommand = true;
-                                    break;
-                                }
-                            }
-                            break;
+                        //case "Коучинг":
+                        //    msg.Text = "coaching";
+                        //    foreach (var command in commands)
+                        //    {
+                        //        if (command.Contains(msg.Text))
+                        //        {
+                        //            command.Execute(msg, client);
+                        //            isCommand = true;
+                        //            break;
+                        //        }
+                        //    }
+                        //    break;
 
-                        case "a":
-                            msg.Text = "a";
-                            foreach (var command in commands)
-                            {
-                                if (command.Contains(msg.Text))
-                                {
-                                    command.Execute(msg, client);
-                                    isCommand = true;
-                                    break;
-                                }
-                            }
-                            break;
+                        //case "a":
+                        //    msg.Text = "a";
+                        //    foreach (var command in commands)
+                        //    {
+                        //        if (command.Contains(msg.Text))
+                        //        {
+                        //            command.Execute(msg, client);
+                        //            isCommand = true;
+                        //            break;
+                        //        }
+                        //    }
+                        //    break;
 
-                        case "b":
-                            msg.Text = "b";
-                            foreach (var command in commands)
-                            {
-                                if (command.Contains(msg.Text))
-                                {
-                                    command.Execute(msg, client);
-                                    isCommand = true;
-                                    break;
-                                }
-                            }
-                            break;
+                        //case "b":
+                        //    msg.Text = "b";
+                        //    foreach (var command in commands)
+                        //    {
+                        //        if (command.Contains(msg.Text))
+                        //        {
+                        //            command.Execute(msg, client);
+                        //            isCommand = true;
+                        //            break;
+                        //        }
+                        //    }
+                        //    break;
 
                         default:
                             await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");

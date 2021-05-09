@@ -19,11 +19,10 @@ namespace shigetsuCoach_Bot.Models.Commands
 
             string messageToSent = "Привет. \n Я играю в доту больше 6 лет и имею 9000 ммр - 160 ранг, могу научить тебя играть волрапвлорп лоарвплоаврплор валпровларп влаопрвлар. \n \n400 рублей 1 час либо 1 реплей. ";
 
-            //await client.SendTextMessageAsync(chatId, messageToSent, replyMarkup:MainMenuController.MainMenuButtons());
+            MainMenuController mainMenuController = new MainMenuController(msg, client);
+            mainMenuController.MainMenuButtons();
 
-            MainMenuController.MainMenuButtons();
 
-           
 
         }
     }

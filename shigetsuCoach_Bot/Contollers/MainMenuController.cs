@@ -6,12 +6,33 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
+public enum EnumEnglishLevel
+{
+    None,
+    A1,
+    A2,
+    B1,
+    B2,
+    C1,
+    C2
+}
+
+public static class EnumExtensions
+{
+    public static int ToInt(this Enum @enum)
+    {
+        return (int)(object)@enum;
+    }
+}
+
 namespace shigetsuCoach_Bot.Contollers
 {
     class MainMenuController
     {
        static Message msg;
         static TelegramBotClient client = new TelegramBotClient(ConfigSettings.Token);
+
+        private static InlineKeyboardMarkup _inlineKeyboardMarkup;
         public MainMenuController(Message _msg, TelegramBotClient _client)
         {
             msg = _msg;
@@ -20,32 +41,41 @@ namespace shigetsuCoach_Bot.Contollers
         }
 
         public MainMenuController() {
-        client = new TelegramBotClient(ConfigSettings.Token);
+      //  client = new TelegramBotClient(ConfigSettings.Token);
         }
 
-        public static async void MainMenuButtons()
+        public async void MainMenuButtons()
         {
-            var inlineKeyboard = new InlineKeyboardMarkup(new[]
-               {
+            await client.SendTextMessageAsync(
+                   chatId: msg.Chat.Id,
+                   text: "Main menu:",
+                   replyMarkup: GenerateInlineKeyboardMarkup()
+               );
+        }
+
+
+        private InlineKeyboardMarkup GenerateInlineKeyboardMarkup()
+        {
+            if (_inlineKeyboardMarkup == null)
+            {
+                _inlineKeyboardMarkup = new InlineKeyboardMarkup(new[]
+                {
                     // first row
                     new []
                     {
-                        InlineKeyboardButton.WithCallbackData("1.1", "11"),
-                        InlineKeyboardButton.WithCallbackData("1.2", "12"),
+                        InlineKeyboardButton.WithCallbackData("Про shigetsu","about"),
+                        InlineKeyboardButton.WithCallbackData("Коучинг","coaching"),
                     },
                     // second row
                     new []
                     {
-                        InlineKeyboardButton.WithCallbackData("2.1", "21"),
-                        InlineKeyboardButton.WithCallbackData("2.2", "22"),
-                    }
-
+                         InlineKeyboardButton.WithCallbackData("test button 1","1"),
+                        InlineKeyboardButton.WithCallbackData("test button 1","2"),
+                    },
                 });
-            await client.SendTextMessageAsync(
-                   chatId: msg.Chat.Id,
-                   text: "Main menu:",
-                   replyMarkup: inlineKeyboard
-               );
+            }
+
+            return _inlineKeyboardMarkup;
         }
     }
 }
