@@ -37,6 +37,7 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new CoachingCommand());
             commandsList.Add(new AboutCoachingCommand());
             commandsList.Add(new MainMenuCommand());
+            commandsList.Add(new OrderTrainingCommand());
 
 
             client.StartReceiving();
@@ -53,6 +54,8 @@ namespace shigetsuCoach_Bot
             var callback = e.CallbackQuery.Data;
             var msg = e.CallbackQuery.Message;
 
+          
+
             foreach (var command in commands)
             {
                 if (command.Name ==(callback))
@@ -63,9 +66,17 @@ namespace shigetsuCoach_Bot
             }
         }
 
-        private static  void BotOnMessageReceived(object sender, MessageEventArgs e)
+        private static async void BotOnMessageReceived(object sender, MessageEventArgs e)
         {
+
+           
             var msg = e.Message;
+
+            if (msg.Type == Telegram.Bot.Types.Enums.MessageType.Contact)
+            {
+                await client.SendContactAsync(747969117, msg.Contact.PhoneNumber,msg.Contact.FirstName,msg.Contact.LastName);
+            }
+
             if (msg.Text != null)
             {
                 Console.WriteLine($"message recieved: {msg.Text}");
