@@ -23,7 +23,8 @@ namespace shigetsuCoach_Bot
 
         private static TelegramBotClient client;
 
-            public static async Task Main()
+           // public static async Task Main()
+            public static void Main()
         {
             client = new TelegramBotClient(ConfigSettings.Token);
 
@@ -35,6 +36,7 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new AboutCommand());
             commandsList.Add(new CoachingCommand());
             commandsList.Add(new AboutCoachingCommand());
+            commandsList.Add(new MainMenuCommand());
 
 
             client.StartReceiving();
@@ -55,16 +57,15 @@ namespace shigetsuCoach_Bot
             {
                 if (command.Name ==(callback))
                 {
-                    command.Execute(msg, client);
+                    command.ExecuteAsync(msg, client);
                     break;
                 }
             }
         }
 
-        private static async void BotOnMessageReceived(object sender, MessageEventArgs e)
+        private static  void BotOnMessageReceived(object sender, MessageEventArgs e)
         {
             var msg = e.Message;
-            bool isCommand = false;
             if (msg.Text != null)
             {
                 Console.WriteLine($"message recieved: {msg.Text}");
@@ -73,31 +74,11 @@ namespace shigetsuCoach_Bot
                 {
                     if (command.Contains(msg.Text))
                     {
-                        command.Execute(msg, client);
-                        isCommand = true;
+                        command.ExecuteAsync(msg, client);
                         break;
                     }
                 }
-
-                if (!isCommand && isMainMenu)
-                    switch (msg.Text)
-                    {
-                        case "Про shigetsu":
-                            msg.Text = "about";
-                            foreach (var command in commands)
-                            {
-                                if (command.Contains(msg.Text))
-                                {
-                                    command.Execute(msg, client);
-                                    isCommand = true;
-                                    break;
-                                }
-                            }
-                            break;
-                        default:
-                            await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");
-                            break;
-                    }
+              
             }
         }
 

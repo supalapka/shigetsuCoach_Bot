@@ -35,7 +35,7 @@ namespace shigetsuCoach_Bot.Contollers
         {
             await client.SendTextMessageAsync(
                    chatId: msg.Chat.Id,
-                   text: "Main menu:",
+                   text: "Главное меню:",
                    replyMarkup: GenerateInlineKeyboardMarkup()
                );
         }
