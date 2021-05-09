@@ -1,4 +1,5 @@
 ﻿using shigetsuCoach_Bot.Commands;
+using shigetsuCoach_Bot.Models.Contollers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -14,7 +15,9 @@ namespace shigetsuCoach_Bot.Models.Commands
             var messageId = msg.MessageId;
 
 
+            CoachingController coachingContoller = new CoachingController(msg, client);
 
+            coachingContoller.MainMenu();
         }
     }
 }

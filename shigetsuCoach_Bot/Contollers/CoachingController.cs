@@ -13,59 +13,36 @@ namespace shigetsuCoach_Bot.Models.Contollers
         public static bool coachControllerWork = true;
         Message msg;
         TelegramBotClient client;
+        private static InlineKeyboardMarkup _inlineKeyboardMarkup;
         public CoachingController(Message _msg, TelegramBotClient _client)
         {
             msg = _msg;
             client = _client;
 
-            client.StartReceiving();
-            client.OnMessage += OnMessageHandler;
-            client.StopReceiving();
-
-        }
-
-        private async void OnMessageHandler(object sender, MessageEventArgs e)
-        {
-            msg = e.Message;
-            System.Console.WriteLine($"message recieved: {msg.Text}");
-            switch (msg.Text)
-            {
-                case "Назад":
-                    Program.isMainMenu = true;
-                    //await client.SendTextMessageAsync(msg.Chat.Id, "Main menu:",replyMarkup:MainMenuController.MainMenuButtons());
-                    MainMenuController mainMenuController = new MainMenuController(msg, client);
-                    mainMenuController.MainMenuButtons();
-                    coachControllerWork = false;
-                    client.StopReceiving();
-                    break;
-                default:
-                    await client.SendTextMessageAsync(msg.Chat.Id, "CoachController: developing..");
-                    client.StopReceiving();
-                    break;
-            }
         }
 
         public CoachingController() { } 
 
         public async void MainMenu()
         {
-            Program.isMainMenu = false;
             await client.SendTextMessageAsync(msg.Chat.Id, "Coaching", replyMarkup: CoachingButtons());
         }
 
-        public static IReplyMarkup CoachingButtons()
+        private InlineKeyboardMarkup CoachingButtons()
         {
-            return new ReplyKeyboardMarkup
+            if (_inlineKeyboardMarkup == null)
             {
-                Keyboard = new List<List<KeyboardButton>>
+                _inlineKeyboardMarkup = new InlineKeyboardMarkup(new[]
                 {
-                    new List<KeyboardButton> { new KeyboardButton { Text = "Про тренировку" }, new KeyboardButton { Text = "Назад" }},
-                }
-            };
-        }
-        ~CoachingController()
-        {
-            Program.isMainMenu = true;
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData("Про коучинг","aboutCoaching"),
+                        InlineKeyboardButton.WithCallbackData("empty button"," "),
+                    },
+                });
+            }
+
+            return _inlineKeyboardMarkup;
         }
     }
 }

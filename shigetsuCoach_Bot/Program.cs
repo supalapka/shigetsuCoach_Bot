@@ -33,6 +33,8 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new HelpCommand());
             commandsList.Add(new StartCommand());
             commandsList.Add(new AboutCommand());
+            commandsList.Add(new CoachingCommand());
+            commandsList.Add(new AboutCoachingCommand());
 
 
             client.StartReceiving();
@@ -44,17 +46,16 @@ namespace shigetsuCoach_Bot
             client.StopReceiving();
         }
 
-        private static async void BotOnCallBackQueryAsync(object sender, CallbackQueryEventArgs e)
+        private static  void BotOnCallBackQueryAsync(object sender, CallbackQueryEventArgs e)
         {
             var callback = e.CallbackQuery.Data;
             var msg = e.CallbackQuery.Message;
 
             foreach (var command in commands)
             {
-                if (command.Contains(callback))
+                if (command.Name ==(callback))
                 {
                     command.Execute(msg, client);
-                    //isCommand = true;
                     break;
                 }
             }
@@ -78,7 +79,6 @@ namespace shigetsuCoach_Bot
                     }
                 }
 
-
                 if (!isCommand && isMainMenu)
                     switch (msg.Text)
                     {
@@ -94,46 +94,6 @@ namespace shigetsuCoach_Bot
                                 }
                             }
                             break;
-
-                        //case "Коучинг":
-                        //    msg.Text = "coaching";
-                        //    foreach (var command in commands)
-                        //    {
-                        //        if (command.Contains(msg.Text))
-                        //        {
-                        //            command.Execute(msg, client);
-                        //            isCommand = true;
-                        //            break;
-                        //        }
-                        //    }
-                        //    break;
-
-                        //case "a":
-                        //    msg.Text = "a";
-                        //    foreach (var command in commands)
-                        //    {
-                        //        if (command.Contains(msg.Text))
-                        //        {
-                        //            command.Execute(msg, client);
-                        //            isCommand = true;
-                        //            break;
-                        //        }
-                        //    }
-                        //    break;
-
-                        //case "b":
-                        //    msg.Text = "b";
-                        //    foreach (var command in commands)
-                        //    {
-                        //        if (command.Contains(msg.Text))
-                        //        {
-                        //            command.Execute(msg, client);
-                        //            isCommand = true;
-                        //            break;
-                        //        }
-                        //    }
-                        //    break;
-
                         default:
                             await client.SendTextMessageAsync(msg.Chat.Id, "Bot is developing..");
                             break;

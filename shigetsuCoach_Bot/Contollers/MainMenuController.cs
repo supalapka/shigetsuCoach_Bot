@@ -6,17 +6,6 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
-public enum EnumEnglishLevel
-{
-    None,
-    A1,
-    A2,
-    B1,
-    B2,
-    C1,
-    C2
-}
-
 public static class EnumExtensions
 {
     public static int ToInt(this Enum @enum)
@@ -37,11 +26,9 @@ namespace shigetsuCoach_Bot.Contollers
         {
             msg = _msg;
             client = _client;
-            // client.OnMessage += OnMessageHandler;
         }
 
         public MainMenuController() {
-      //  client = new TelegramBotClient(ConfigSettings.Token);
         }
 
         public async void MainMenuButtons()
