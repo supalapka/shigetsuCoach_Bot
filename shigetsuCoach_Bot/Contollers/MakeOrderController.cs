@@ -21,7 +21,7 @@ namespace shigetsuCoach_Bot.Contollers
 
         public async void GetContact()
         {
-            var messageToSent = "Для дальнейшей связи после оплаты нам потребуются твои контактные данные (телеграм)";
+            var messageToSent = "Для дальнейшей связи после оплаты нам потребуются твои контактные данные.";
 
             shareButton = new ReplyKeyboardMarkup(new[]
               {
@@ -29,14 +29,14 @@ namespace shigetsuCoach_Bot.Contollers
                 });
             await client.SendTextMessageAsync(
                 chatId: msg.Chat.Id,
-                text: messageToSent + msg.Chat.Id,
+                text: messageToSent,
                 replyMarkup: shareButton
             );
         }
 
         public  async void SetPayment()
         {
-            var messageToSent = "На даную карту 5168 7451 0006 7021 скинуть 600 рублей/200 гривен. После оплаты нажать \"я оплатил\" и далее отправить скриншот платежа сюда.\n" +
+            var messageToSent = "На данную карту 5168 7451 0006 7021 скинуть 600 рублей/200 гривен. После оплаты нажать \"я оплатил\" и далее отправить скриншот платежа сюда.\n" +
                 "После проверки скриншота и баланса на карте, с Вами уже свяжутся в дискорде.\n" +
                 "\n" +
                 "Если есть вопросы касательно оплаты, то можно связаться с менеджером.";

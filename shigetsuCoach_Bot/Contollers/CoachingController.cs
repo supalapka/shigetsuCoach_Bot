@@ -32,7 +32,7 @@ namespace shigetsuCoach_Bot.Models.Contollers
                     new []
                     {
                         InlineKeyboardButton.WithCallbackData("Про коучинг","aboutCoaching"),
-                        InlineKeyboardButton.WithCallbackData("empty button"," "),
+                        InlineKeyboardButton.WithCallbackData("Отзывы","reviews"),
                     },
                 });
             }
