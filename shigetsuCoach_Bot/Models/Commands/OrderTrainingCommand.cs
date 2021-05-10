@@ -17,6 +17,7 @@ namespace shigetsuCoach_Bot.Models.Commands
         {
             MakeOrderController makeOrderController = new MakeOrderController(msg, client);
             makeOrderController.GetContact();
+            //makeOrderController.SetPayment();
         }
 
        

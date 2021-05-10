@@ -1,8 +1,4 @@
-﻿using shigetsuCoach_Bot.Contollers;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Telegram.Bot;
-using Telegram.Bot.Args;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -24,7 +20,7 @@ namespace shigetsuCoach_Bot.Models.Contollers
 
         public async void MainMenu()
         {
-            await client.SendTextMessageAsync(msg.Chat.Id, "Coaching", replyMarkup: CoachingButtons());
+            await client.SendTextMessageAsync(msg.Chat.Id, "Коучинг меню", replyMarkup: CoachingButtons());
         }
 
         private InlineKeyboardMarkup CoachingButtons()

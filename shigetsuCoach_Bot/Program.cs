@@ -1,9 +1,13 @@
 ﻿using shigetsuCoach_Bot.Commands;
+using shigetsuCoach_Bot.Contollers;
 using shigetsuCoach_Bot.Models;
 using shigetsuCoach_Bot.Models.Commands;
 using shigetsuCoach_Bot.Models.Contollers;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -76,9 +80,16 @@ namespace shigetsuCoach_Bot
             {
                 await client.SendContactAsync(747969117, msg.Contact.PhoneNumber,msg.Contact.FirstName,msg.Contact.LastName);
                 await client.SendTextMessageAsync(msg.Chat.Id, "Контакт добавлен в список", replyMarkup:new ReplyKeyboardRemove());
-
-
-
+                MakeOrderController makeOrderController = new MakeOrderController(msg, client);
+                makeOrderController.SetPayment();
+            }
+            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo)
+            {
+                var test = await client.GetFileAsync(msg.Photo[msg.Photo.Count() - 1].FileId);
+                ConfirmPaymentContoller confirmPaymentContoller = new ConfirmPaymentContoller(msg, client);
+                confirmPaymentContoller.SendShigetsuScreen(test);
+                // await client.SendPhotoAsync(msg.Chat.Id, test.FileId);
+                //     await client.SendPhotoAsync(443521128, test.FileId);
             }
 
             if (msg.Text != null)
@@ -95,6 +106,16 @@ namespace shigetsuCoach_Bot
                 }
               
             }
+        }
+
+        public static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
 
     }
