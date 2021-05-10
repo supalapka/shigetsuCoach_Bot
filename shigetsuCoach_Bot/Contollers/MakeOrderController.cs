@@ -19,12 +19,9 @@ namespace shigetsuCoach_Bot.Contollers
         public MakeOrderController() { }
 
 
-
-
         public async void GetContact()
         {
             var messageToSent = "Для дальнейшей связи после оплаты нам потребуются твои контактные данные (телеграм)";
-            // await client.SendTextMessageAsync(747969117, "вот данные", replyMarkup: GetButtonShareConstacts());
 
             shareButton = new ReplyKeyboardMarkup(new[]
               {

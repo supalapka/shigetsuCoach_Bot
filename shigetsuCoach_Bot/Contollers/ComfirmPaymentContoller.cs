@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using shigetsuCoach_Bot.Models;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -21,9 +22,7 @@ namespace shigetsuCoach_Bot.Contollers
 
         public async void SendShigetsuScreen(Telegram.Bot.Types.File file)
         {
-            await client.SendPhotoAsync(443521128, file.FileId,replyMarkup:ConfirmButtons());
-            //await client.SendPhotoAsync(msg.Chat.Id, file.FileId,replyMarkup:ConfirmButtons());
-            // await client.SendPhotoAsync(msg.Chat.Id, msg.Photo);
+            await client.SendPhotoAsync(ConfigSettings.shigetsuId, file.FileId,replyMarkup:ConfirmButtons());
         }
 
 
