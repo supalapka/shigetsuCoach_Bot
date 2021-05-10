@@ -36,8 +36,10 @@ namespace shigetsuCoach_Bot.Contollers
 
         public  async void SetPayment()
         {
-            var messageToSent = "На даную карту 5166 7422 2993 6467 скинуть 600 рублей/200 гривен. После оплаты нажать \"я оплатил\" и отправить скриншот платежа сюда.\n" +
-                "После проверки скриншота и баланса на карте с вами свяжется человек для уточнения времени проведения разбора реплея. (тест текст)";
+            var messageToSent = "На даную карту 5168 7451 0006 7021 скинуть 600 рублей/200 гривен. После оплаты нажать \"я оплатил\" и далее отправить скриншот платежа сюда.\n" +
+                "После проверки скриншота и баланса на карте, с Вами уже свяжутся в дискорде.\n" +
+                "\n" +
+                "Если есть вопросы касательно оплаты, то можно связаться с менеджером.";
             await client.SendTextMessageAsync(
               chatId: msg.Chat.Id,
               text: messageToSent,
@@ -54,6 +56,11 @@ namespace shigetsuCoach_Bot.Contollers
                     new []
                     {
                         InlineKeyboardButton.WithCallbackData("Я оплатил","paymentDone"),
+                        InlineKeyboardButton.WithCallbackData("Связаться с менеджером","managerContact"),
+                    },
+                    new []
+                    {
+                      //  InlineKeyboardButton.WithCallbackData("","paymentDone"),
                         InlineKeyboardButton.WithCallbackData("Отмена","cencel"),
                     },
                 });

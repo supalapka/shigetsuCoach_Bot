@@ -22,7 +22,7 @@ namespace shigetsuCoach_Bot.Contollers
 
         public async void SendShigetsuScreen(Telegram.Bot.Types.File file)
         {
-            await client.SendPhotoAsync(ConfigSettings.shigetsuId, file.FileId,replyMarkup:ConfirmButtons());
+            await client.SendPhotoAsync(ConfigSettings.shigetsuId, file.FileId, replyMarkup:ConfirmButtons());
         }
 
 

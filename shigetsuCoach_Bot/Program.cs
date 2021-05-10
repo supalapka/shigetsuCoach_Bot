@@ -40,13 +40,14 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new AboutCoachingCommand());
             commandsList.Add(new MainMenuCommand());
             commandsList.Add(new OrderTrainingCommand());
-
+            commandsList.Add(new ManagerContactCommand());
+            commandsList.Add(new CencelCommand());
 
             client.StartReceiving();
             client.OnMessage += BotOnMessageReceived;
             client.OnCallbackQuery += BotOnCallBackQueryAsync;
 
-            //  Console.ReadLine();
+            // Console.ReadLine();
             while (botWorks)  { }
             client.StopReceiving();
         }
@@ -70,8 +71,6 @@ namespace shigetsuCoach_Bot
 
         private static async void BotOnMessageReceived(object sender, MessageEventArgs e)
         {
-
-           
             var msg = e.Message;
 
             if (msg.Type == Telegram.Bot.Types.Enums.MessageType.Contact)
@@ -91,7 +90,6 @@ namespace shigetsuCoach_Bot
             if (msg.Text != null)
             {
                 Console.WriteLine($"message recieved: {msg.Text}");
-
                 foreach (var command in commands)
                 {
                     if (command.Contains(msg.Text))
@@ -100,7 +98,6 @@ namespace shigetsuCoach_Bot
                         break;
                     }
                 }
-              
             }
         }
 
@@ -113,6 +110,5 @@ namespace shigetsuCoach_Bot
             stream.Position = 0;
             return stream;
         }
-
     }
 }
