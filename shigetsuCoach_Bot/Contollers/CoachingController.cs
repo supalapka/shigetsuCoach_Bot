@@ -10,7 +10,6 @@ namespace shigetsuCoach_Bot.Models.Contollers
 {
     public class CoachingController
     {
-        public static bool coachControllerWork = true;
         Message msg;
         TelegramBotClient client;
         private static InlineKeyboardMarkup _inlineKeyboardMarkup;

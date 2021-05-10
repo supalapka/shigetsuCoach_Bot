@@ -54,7 +54,7 @@ namespace shigetsuCoach_Bot
             var callback = e.CallbackQuery.Data;
             var msg = e.CallbackQuery.Message;
 
-          
+            Console.WriteLine($"message recieved: {callback}");
 
             foreach (var command in commands)
             {
@@ -75,6 +75,10 @@ namespace shigetsuCoach_Bot
             if (msg.Type == Telegram.Bot.Types.Enums.MessageType.Contact)
             {
                 await client.SendContactAsync(747969117, msg.Contact.PhoneNumber,msg.Contact.FirstName,msg.Contact.LastName);
+                await client.SendTextMessageAsync(msg.Chat.Id, "Контакт добавлен в список", replyMarkup:new ReplyKeyboardRemove());
+
+
+
             }
 
             if (msg.Text != null)
