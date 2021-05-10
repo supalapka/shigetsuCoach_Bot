@@ -54,6 +54,12 @@ namespace shigetsuCoach_Bot
 
         private static  void BotOnCallBackQueryAsync(object sender, CallbackQueryEventArgs e)
         {
+            //quick test db
+            ReviewsController reviewsController = new ReviewsController();
+            reviewsController.SaveReviews("my first review");
+
+            //end test
+
             var callback = e.CallbackQuery.Data;
             var msg = e.CallbackQuery.Message;
 
