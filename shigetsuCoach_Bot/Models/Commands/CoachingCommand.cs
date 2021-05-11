@@ -33,10 +33,10 @@ namespace shigetsuCoach_Bot.Models.Commands
             InputMediaPhoto inputMediaPhoto1 = new InputMediaPhoto(imagePath1);
             InputMediaPhoto inputMediaPhoto2 = new InputMediaPhoto(imagePath2);
 
-            InputMediaBase media = new InputMediaBase(imagePath1);
+          //  InputMediaBase media = new InputMediaBase(imagePath1);
 
 
-            await client.SendMediaGroupAsync(chatId, (inputMediaPhoto1, inputMediaPhoto2));
+          //  await client.SendMediaGroupAsync(chatId, (inputMediaPhoto1, inputMediaPhoto2));
 
             CoachingController coachingContoller = new CoachingController(msg, client);
             coachingContoller.MainMenu();
