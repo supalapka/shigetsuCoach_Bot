@@ -1,6 +1,7 @@
 ﻿using shigetsuCoach_Bot.Commands;
 using shigetsuCoach_Bot.Contollers;
-using shigetsuCoach_Bot.Models;
+using shigetsuCoach_Bot.Data;
+using shigetsuCoach_Bot.Models; 
 using shigetsuCoach_Bot.Models.Commands;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace shigetsuCoach_Bot
         {
             //quick test db
             ReviewsController reviewsController = new ReviewsController();
-            reviewsController.SaveReviews("my first review");
+            reviewsController.SaveRivew("my 3 user review");
 
             //end test
 
@@ -79,14 +80,18 @@ namespace shigetsuCoach_Bot
         {
             var msg = e.Message;
 
-            if (msg.Type == Telegram.Bot.Types.Enums.MessageType.Contact)
+            if (msg.Type == Telegram.Bot.Types.Enums.MessageType.Contact) // contacts logic
             {
                 await client.SendContactAsync(ConfigSettings.supalapkaId, msg.Contact.PhoneNumber,msg.Contact.FirstName,msg.Contact.LastName);
                 await client.SendTextMessageAsync(msg.Chat.Id, "Контакт добавлен в список", replyMarkup:new ReplyKeyboardRemove());
                 MakeOrderController makeOrderController = new MakeOrderController(msg, client);
                 makeOrderController.SetPayment();
+
+                ReviewsController reviewsController = new ReviewsController(msg, client);
+                reviewsController.SaveUser();
             }
-            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo)
+
+            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo) //photo logic
             {
                 var test = await client.GetFileAsync(msg.Photo[msg.Photo.Count() - 1].FileId);
                 ConfirmPaymentContoller confirmPaymentContoller = new ConfirmPaymentContoller(msg, client);

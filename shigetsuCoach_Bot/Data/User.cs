@@ -6,8 +6,9 @@ namespace shigetsuCoach_Bot.Data
 {
     class User
     {
-        public int Id { get; set; }
-        public int UserTelegramId { get; set; }
-        public string Name { get; set; }
+        public int id { get; set; }
+        public long userTelegramId { get; set; }
+        public string firstName { get; set; }
+        public string phoneNumber { get; set; }
     }
 }

@@ -17,24 +17,45 @@ namespace shigetsuCoach_Bot.Contollers
             msg = _msg;
             client = _client;
 
-           // SaveReviews("first text review");
+            // SaveReviews("first text review");
         }
 
         public ReviewsController() { }
 
 
 
-        public void SaveReviews(string _review)
+        public void SaveRivew(string _review)
+        {
+            //using (var context = new MyDbContext())
+            //{
+            //    var review = new Review()
+            //    {
+            //        ReviewString = _review,
+            //    };
+
+            //    context.Reviews.Add(review);
+            //    context.SaveChanges();
+            //}
+        }
+
+        public void SaveUser()
         {
             using (var context = new MyDbContext())
             {
-                var review = new Review()
+                var user = new Data.User()
                 {
-                    ReviewString = _review,
+                    userTelegramId = msg.Chat.Id,
+                    firstName = msg.Contact.FirstName,
+                    phoneNumber = msg.Contact.PhoneNumber
+
                 };
-                context.Reviews.Add(review);
+                context.Users.Add(user);
                 context.SaveChanges();
             }
         }
+
+
+
+        //get reviews TODO
     }
 }

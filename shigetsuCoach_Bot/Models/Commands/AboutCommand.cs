@@ -18,7 +18,7 @@ namespace shigetsuCoach_Bot.Models.Commands
             var chatId = msg.Chat.Id;
             var messageId = msg.MessageId;
 
-            var imagePath = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Files\mmr.png");
+            var imagePath = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Data\Files\mmr.png");
 
             var outPutString = "Имя - Максим \nВозраст - 17 \nМмр - 9100\nRank - 150 \npos - 1 \nDOTABUFF - https://ru.dotabuff.com/players/194979527 \nDiscord - Shigetsu0#5979 \n";
             using (var stream = System.IO.File.OpenRead(imagePath))
