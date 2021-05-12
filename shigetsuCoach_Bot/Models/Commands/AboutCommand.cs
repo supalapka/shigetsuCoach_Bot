@@ -12,6 +12,7 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "about";
 
+        public override bool isPublic => true;
 
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {

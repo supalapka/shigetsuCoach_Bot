@@ -12,6 +12,8 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "cencel";
 
+        public override bool isPublic => false;
+
         public override void ExecuteAsync(Message msg, TelegramBotClient client)
         {
             MainMenuController m = new MainMenuController(msg, client);

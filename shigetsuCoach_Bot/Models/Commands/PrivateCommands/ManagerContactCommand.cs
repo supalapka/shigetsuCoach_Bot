@@ -11,6 +11,8 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "managerContact";
 
+        public override bool isPublic => false;
+
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
             await client.SendContactAsync(msg.Chat.Id, ConfigSettings.supalapkaPhone,ConfigSettings.supalapkaName);

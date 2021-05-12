@@ -12,6 +12,8 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "reviews";
 
+        public override bool isPublic => true;
+
         public override void ExecuteAsync(Message msg, TelegramBotClient client)
         {
             ReviewsController reviewsController = new ReviewsController(msg, client);

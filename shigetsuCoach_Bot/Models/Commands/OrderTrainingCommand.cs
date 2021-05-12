@@ -12,6 +12,9 @@ namespace shigetsuCoach_Bot.Models.Commands
     class OrderTrainingCommand : Command
     {
         public override string Name => "makeOrder";
+
+        public override bool isPublic => true;
+
         public static ReplyKeyboardMarkup _inlineKeyboardMarkup;
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {

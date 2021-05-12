@@ -13,6 +13,8 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "startMenu";
 
+        public override bool isPublic => true;
+
         public override  void ExecuteAsync(Message msg, TelegramBotClient client)
         {
             MainMenuController mainMenuController = new MainMenuController(msg, client);

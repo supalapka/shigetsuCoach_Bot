@@ -12,6 +12,8 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "aboutCoaching";
 
+        public override bool isPublic => true;
+
         private static InlineKeyboardMarkup _inlineKeyboardMarkup;
 
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)

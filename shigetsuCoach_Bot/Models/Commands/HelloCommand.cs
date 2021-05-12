@@ -10,6 +10,8 @@ namespace shigetsuCoach_Bot.Commands
     {
         public override string Name => "hello";
 
+        public override bool isPublic => true;
+
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
             var chatId = msg.Chat.Id;

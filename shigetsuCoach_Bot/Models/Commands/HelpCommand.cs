@@ -11,6 +11,8 @@ namespace shigetsuCoach_Bot.Models.Commands
     {
         public override string Name => "help";
 
+        public override bool isPublic => true;
+
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
             var chatId = msg.Chat.Id;
