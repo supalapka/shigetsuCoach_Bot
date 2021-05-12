@@ -40,6 +40,8 @@ namespace shigetsuCoach_Bot.Contollers
                 "После проверки скриншота и баланса на карте, с Вами уже свяжутся в дискорде.\n" +
                 "\n" +
                 "Если есть вопросы касательно оплаты, то можно связаться с менеджером.";
+
+            //TODO EDIT
             await client.SendTextMessageAsync(
               chatId: msg.Chat.Id,
               text: messageToSent,

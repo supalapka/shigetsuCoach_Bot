@@ -6,7 +6,7 @@ using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
-
+ 
 namespace shigetsuCoach_Bot.Models.Commands
 {
     class OrderTrainingCommand : Command
@@ -17,7 +17,6 @@ namespace shigetsuCoach_Bot.Models.Commands
         {
             MakeOrderController makeOrderController = new MakeOrderController(msg, client);
             makeOrderController.GetContact();
-            //makeOrderController.SetPayment();
         }
 
        

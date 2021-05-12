@@ -43,6 +43,7 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new OrderTrainingCommand());
             commandsList.Add(new ManagerContactCommand());
             commandsList.Add(new CencelCommand());
+            commandsList.Add(new ReviewsCommand());
 
             client.StartReceiving();
             client.OnMessage += BotOnMessageReceived;
@@ -55,12 +56,6 @@ namespace shigetsuCoach_Bot
 
         private static  void BotOnCallBackQueryAsync(object sender, CallbackQueryEventArgs e)
         {
-            //quick test db
-            ReviewsController reviewsController = new ReviewsController();
-            reviewsController.SaveRivew("my 3 user review");
-
-            //end test
-
             var callback = e.CallbackQuery.Data;
             var msg = e.CallbackQuery.Message;
 
@@ -87,8 +82,8 @@ namespace shigetsuCoach_Bot
                 MakeOrderController makeOrderController = new MakeOrderController(msg, client);
                 makeOrderController.SetPayment();
 
-                ReviewsController reviewsController = new ReviewsController(msg, client);
-                reviewsController.SaveUser();
+              //  ReviewsController reviewsController = new ReviewsController(msg, client);
+              //  reviewsController.SaveUser();
             }
 
             else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo) //photo logic
