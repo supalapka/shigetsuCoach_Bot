@@ -8,6 +8,12 @@ namespace shigetsuCoach_Bot.Data
     {
         public int id { get; set; }
         public long userTelegramId { get; set; }
+        //public long userTelegramId {
+        //    get { return userTelegramId; }
+        //    set {
+        //        userTelegramId = Convert.ToInt64(value);
+        //            }
+        //}
         public string firstName { get; set; }
         public string phoneNumber { get; set; }
     }

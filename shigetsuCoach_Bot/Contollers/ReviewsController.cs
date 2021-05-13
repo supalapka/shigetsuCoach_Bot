@@ -40,24 +40,21 @@ namespace shigetsuCoach_Bot.Contollers
             //}
         }
 
-        //public void SaveUser()
-        //{
-        //    using (var context = new MyDbContext())
-        //    {
-        //        var user = new Data.User()
-        //        {
-        //            userTelegramId = msg.Chat.Id,
-        //            firstName = msg.Contact.FirstName,
-        //            phoneNumber = msg.Contact.PhoneNumber
+        public async void SaveUser()
+        {
+            using (var context = new MyDbContext())
+            {
+                var user = new Data.User()
+                {
+                    userTelegramId = msg.Chat.Id,
+                    firstName = msg.Contact.FirstName,
+                    phoneNumber = msg.Contact.PhoneNumber
 
-        //        };
-        //        context.Users.Add(user);
-        //        context.SaveChangesAsync();
-        //    }
-        //}
-
-        //get reviews TODO
-
+                };
+                context.Users.Add(user);
+               await context.SaveChangesAsync();
+            }
+        }
 
         public async void ShowReviews()
         {

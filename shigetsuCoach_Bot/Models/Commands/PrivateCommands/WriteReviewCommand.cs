@@ -29,12 +29,10 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                 {
                     new []
                     {
-                        InlineKeyboardButton.WithCallbackData("Оставить отзыв","about"),
                         InlineKeyboardButton.WithCallbackData("Отказаться","cencel"),
                     },
                 });
             }
-
             return _inlineKeyboardMarkup;
         }
     }

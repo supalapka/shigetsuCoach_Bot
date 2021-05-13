@@ -82,15 +82,15 @@ namespace shigetsuCoach_Bot
                 MakeOrderController makeOrderController = new MakeOrderController(msg, client);
                 makeOrderController.SetPayment();
 
-              //  ReviewsController reviewsController = new ReviewsController(msg, client);
-              //  reviewsController.SaveUser();
+                ReviewsController reviewsController = new ReviewsController(msg, client); 
+                reviewsController.SaveUser(); //save user func in reviews....
             }
 
-            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo) //photo logic
+            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo) //photo logic. sends photo(paymentscreen to shigetsu
             {
-                var test = await client.GetFileAsync(msg.Photo[msg.Photo.Count() - 1].FileId);
+                var screen = await client.GetFileAsync(msg.Photo[msg.Photo.Count() - 1].FileId);
                 ConfirmPaymentContoller confirmPaymentContoller = new ConfirmPaymentContoller(msg, client);
-                confirmPaymentContoller.SendShigetsuScreen(test);
+                confirmPaymentContoller.SendShigetsuScreen(screen);
             }
 
             if (msg.Text != null)
