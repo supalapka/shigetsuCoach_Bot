@@ -3,6 +3,7 @@ using shigetsuCoach_Bot.Contollers;
 using shigetsuCoach_Bot.Data;
 using shigetsuCoach_Bot.Models; 
 using shigetsuCoach_Bot.Models.Commands;
+using shigetsuCoach_Bot.Models.Commands.PrivateCommands;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +45,7 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new ManagerContactCommand());
             commandsList.Add(new CencelCommand());
             commandsList.Add(new ReviewsCommand());
+            commandsList.Add(new ConfirmCommand());
 
             client.StartReceiving();
             client.OnMessage += BotOnMessageReceived;
@@ -65,6 +67,16 @@ namespace shigetsuCoach_Bot
             {
                 if (command.Name ==(callback))
                 {
+                    command.ExecuteAsync(msg, client);
+                    break;
+                }
+            }
+
+            foreach (var command in commands) //payment confirm
+            {
+                if (command.Contains("Confirm"))
+                {
+                    msg.Text = callback;
                     command.ExecuteAsync(msg, client);
                     break;
                 }

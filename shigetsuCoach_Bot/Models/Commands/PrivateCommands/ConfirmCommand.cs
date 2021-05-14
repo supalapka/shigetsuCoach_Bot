@@ -1,7 +1,5 @@
 ﻿using shigetsuCoach_Bot.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -13,9 +11,15 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
 
         public override bool isPublic => false;
 
-        public override void ExecuteAsync(Message msg, TelegramBotClient client)
+        public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
-           
+                string chatId = msg.Text.Remove(0,7); //confirm word skip
+                Console.WriteLine(chatId);
+
+            await client.SendTextMessageAsync(Convert.ToInt64(chatId), ("Оплата реплея успешна! \n\n" +
+                "Скиньте данный код " + chatId + " в дискорд Shigetsu0#5979 и далее он уже с вами довогорится о всем"));
+
+            await client.SendTextMessageAsync(msg.Chat.Id, chatId + " успешно прошел оплату");
         }
     }
 }
