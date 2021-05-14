@@ -19,7 +19,7 @@ namespace shigetsuCoach_Bot.Models.Commands
             var chatId = msg.Chat.Id;
             var messageId = msg.MessageId;
 
-            string messageToSent = "Привет. \n Я играю в доту больше 6 лет и имею более 9000 ммр - 150 ранг, могу научить тебя играть волрапвлорп лоарвплоаврплор валпровларп влаопрвлар. \n\n600 рублей 1 час либо 1 реплей. ";
+            string messageToSent = "Привет \nЯ играю в доту 6 лет и имею более 9000 ммр - 150 ранг, у меня можно заказать разбор реплея и начать импруваться при этом не тратить 1 год ради 1000 птс\n\n600 рублей - 1 реплей ";
 
             await client.SendTextMessageAsync(chatId, messageToSent);
             MainMenuController mainMenuController = new MainMenuController(msg, client);
