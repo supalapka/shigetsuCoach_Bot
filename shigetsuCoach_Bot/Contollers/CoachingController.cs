@@ -13,7 +13,6 @@ namespace shigetsuCoach_Bot.Models.Contollers
         {
             msg = _msg;
             client = _client;
-
         }
 
         public CoachingController() { } 
@@ -31,7 +30,7 @@ namespace shigetsuCoach_Bot.Models.Contollers
                 {
                     new []
                     {
-                        InlineKeyboardButton.WithCallbackData("Про коучинг","aboutCoaching"),
+                        InlineKeyboardButton.WithCallbackData("Про разбор","aboutCoaching"),
                         InlineKeyboardButton.WithCallbackData("Отзывы","reviews"),
                     },
                 });

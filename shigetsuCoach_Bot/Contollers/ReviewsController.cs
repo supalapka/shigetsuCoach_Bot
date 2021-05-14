@@ -68,14 +68,18 @@ namespace shigetsuCoach_Bot.Contollers
                 reviews = await GetReviewsString(context);
             }
 
-            foreach(var review in reviews)
-            {
-                outputString.Append(review + "\n\n");
-            }
-
             await client.SendTextMessageAsync(msg.Chat.Id, "Отзывы");
-            await client.SendTextMessageAsync(msg.Chat.Id, outputString.ToString());
+            if (reviews.Count != 0)
+            {
+                foreach (var review in reviews)
+                {
+                    outputString.Append(review + "\n\n");
+                }
 
+                await client.SendTextMessageAsync(msg.Chat.Id, outputString.ToString());
+            }
+            else
+                await client.SendTextMessageAsync(msg.Chat.Id, "Пока нет ни одного отзыва");
         }
 
         private async Task<List<string>> GetReviewsString(MyDbContext _context)
