@@ -86,11 +86,12 @@ namespace shigetsuCoach_Bot
                 reviewsController.SaveUser(); //save user func in reviews....
             }
 
-            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo) //photo logic. sends photo(paymentscreen to shigetsu
+            else if(msg.Type == Telegram.Bot.Types.Enums.MessageType.Photo) //photo logic. sends photo / paymentscreen to shigetsu
             {
                 var screen = await client.GetFileAsync(msg.Photo[msg.Photo.Count() - 1].FileId);
                 ConfirmPaymentContoller confirmPaymentContoller = new ConfirmPaymentContoller(msg, client);
-                confirmPaymentContoller.SendShigetsuScreen(screen);
+                confirmPaymentContoller.SendShigetsuScreen(screen, msg.Chat.Id);
+                await client.SendTextMessageAsync(msg.Chat.Id,"Скриншот отправлен на проверку, сразу же после успешной проверки вам напишут про реплей");
             }
 
             if (msg.Text != null)

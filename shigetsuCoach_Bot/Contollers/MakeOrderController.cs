@@ -36,7 +36,7 @@ namespace shigetsuCoach_Bot.Contollers
 
         public  async void SetPayment()
         {
-            var messageToSent = "На данную карту 5168 7451 0006 7021 скинуть 600 рублей/200 гривен. После оплаты нажать \"я оплатил\" и далее отправить скриншот платежа сюда.\n" +
+            var messageToSent = "Оплата на карту  5168 7451 0006 7021 mastercard скинуть 600 рублей/200 гривен. После оплаты нажать \"я оплатил\" и далее отправить скриншот платежа сюда.\n" +
                 "После проверки скриншота и баланса на карте, с Вами уже свяжутся в дискорде.\n" +
                 "\n" +
                 "Если есть вопросы касательно оплаты, то можно связаться с менеджером.";
@@ -62,7 +62,6 @@ namespace shigetsuCoach_Bot.Contollers
                     },
                     new []
                     {
-                      //  InlineKeyboardButton.WithCallbackData("","paymentDone"),
                         InlineKeyboardButton.WithCallbackData("Отмена","cencel"),
                     },
                 });

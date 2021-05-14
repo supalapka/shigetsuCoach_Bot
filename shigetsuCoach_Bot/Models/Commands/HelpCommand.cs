@@ -23,7 +23,7 @@ namespace shigetsuCoach_Bot.Models.Commands
             string outputString = "Список команд: \n";
             foreach (var command in commands)
             {
-                if (command.Name != "help")
+                if (command.Name != "help" && command.isPublic)
                     outputString += $"/{command.Name} \n";
 
             }
