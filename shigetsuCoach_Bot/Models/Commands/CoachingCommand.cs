@@ -25,7 +25,7 @@ namespace shigetsuCoach_Bot.Models.Commands
                 "\n" +
                 "Гораздо профитнее узнать о своих ошибках, когда тебе их говорят, а не избавляться от них спустя 1000 матчей и терять много времени для достижения цели, которую можно получить повторяя решения построеные на опыте хай ранга.\n\n" +
                 "В доте почти нет людей которые с рангом 130 будут разбирать твой реплей в дискорде.\n\n" +
-                "Ты услышишь много мыслей по твоей игре со стороны 9к игрока, что может изменить твое понимание игры в целом и сам начешь думать не так, как игроки с твоего рейтинга.\n\n" +
+                "Ты услышишь много мыслей по твоей игре со стороны 9к игрока, что может изменить твое понимание игры в целом и сам начнешь думать не так, как игроки с твоего рейтинга.\n\n" +
                 "" +
                  "Аналоги разборов за такую цену можно найти от 7-8к игроков(1000 ранг), из них которые 8к попадаются с про игроками 1 раз в 5 игр.\n" +
                 "Здесь же я каждый матч играю против про игроков.\n\n";
@@ -40,13 +40,13 @@ namespace shigetsuCoach_Bot.Models.Commands
             //    System.IO.File.OpenRead(imagePath2),
             //};
 
-            //List<InputMediaPhoto> media = new List<InputMediaPhoto>();
+            //List<InputMediaPhoto> m edia = new List<InputMediaPhoto>();
 
 
             //media.Add(new InputMediaPhoto(new InputMedia(streams[0], "sd")));
             //media.Add(new InputMediaPhoto(new InputMedia(streams[1], "fg")));
 
-            //await client.SendTextMessageAsync(chatId, output);
+            await client.SendTextMessageAsync(chatId, output);
 
             //await client.SendMediaGroupAsync(chatId,media);
 

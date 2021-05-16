@@ -21,7 +21,7 @@ namespace shigetsuCoach_Bot.Models.Commands
 
             var imagePath = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Data\Files\mmr.png");
 
-            var outPutString = "Имя - Максим \nВозраст - 17 \nМмр - 9100\nRank - 150 \npos - 1 \nDOTABUFF - https://ru.dotabuff.com/players/194979527 \nDiscord - Shigetsu0#5979 \n";
+            var outPutString = "Имя - Максим \nВозраст - 17 \nМмр - 9100\nRank - 140 \npos - 1 \nDOTABUFF - https://ru.dotabuff.com/players/194979527 \nDiscord - Shigetsu0#5979 \n";
             using (var stream = System.IO.File.OpenRead(imagePath))
             {
                 await client.SendPhotoAsync(chatId, photo: stream,caption: outPutString);

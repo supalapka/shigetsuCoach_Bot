@@ -102,7 +102,7 @@ namespace shigetsuCoach_Bot
                 var screen = await client.GetFileAsync(msg.Photo[msg.Photo.Count() - 1].FileId);
                 ConfirmPaymentContoller confirmPaymentContoller = new ConfirmPaymentContoller(msg, client);
                 confirmPaymentContoller.SendShigetsuScreen(screen, msg.Chat.Id);
-                await client.SendTextMessageAsync(msg.Chat.Id, "Скриншот отправлен на проверку, сразу же после успешной проверки вам напишут про реплей");
+                await client.SendTextMessageAsync(msg.Chat.Id, "Скриншот отправлен на проверку, сразу же после успешной проверки я вам скину код");
             }
 
             if (msg.Text != null)
