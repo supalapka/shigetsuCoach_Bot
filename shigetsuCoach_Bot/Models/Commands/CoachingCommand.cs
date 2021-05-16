@@ -23,31 +23,32 @@ namespace shigetsuCoach_Bot.Models.Commands
 
             string output = "Почему тебе стоит заказать разбор реплея?\n" +
                 "\n" +
-                "Гараздо профитнее узнать о своих ошибках, когда тебе их говорять, а не избавляться от них спустя 1000 матчей.\n" +
-                "В доте почти нет людей которые с рангом 140 будут разбирать твой реплей в дискорде.\n" +
-                "Аналоги разборов за такую цену можно найти от 6-7к игроков(1500 ранг) которым явно далеко до игры с про игроками.\n" +
-                "\n" +
-                "Имея 140 ранг я уже играл в стаках с чего имею опыт профессиональной доты и уже обыграл винстрайк на квалах (ноябрь 2020 год, 700 ранг).\n";
+                "Гораздо профитнее узнать о своих ошибках, когда тебе их говорят, а не избавляться от них спустя 1000 матчей и терять много времени для достижения цели, которую можно получить повторяя решения построеные на опыте хай ранга.\n\n" +
+                "В доте почти нет людей которые с рангом 130 будут разбирать твой реплей в дискорде.\n\n" +
+                "Ты услышишь много мыслей по твоей игре со стороны 9к игрока, что может изменить твое понимание игры в целом и сам начешь думать не так, как игроки с твоего рейтинга.\n\n" +
+                "" +
+                 "Аналоги разборов за такую цену можно найти от 7-8к игроков(1000 ранг), из них которые 8к попадаются с про игроками 1 раз в 5 игр.\n" +
+                "Здесь же я каждый матч играю против про игроков.\n\n";
 
 
-            var imagePath1 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Data\Files\winstrike1.png");
-            var imagePath2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Data\Files\winstrike2.png");
+            //var imagePath1 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Data\Files\winstrike1.png");
+            //var imagePath2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Data\Files\winstrike2.png");
 
-            List<FileStream> streams = new List<FileStream>
-            {
-                System.IO.File.OpenRead(imagePath1),
-                System.IO.File.OpenRead(imagePath2),
-            };
+            //List<FileStream> streams = new List<FileStream>
+            //{
+            //    System.IO.File.OpenRead(imagePath1),
+            //    System.IO.File.OpenRead(imagePath2),
+            //};
 
-            List<InputMediaPhoto> media = new List<InputMediaPhoto>();
+            //List<InputMediaPhoto> media = new List<InputMediaPhoto>();
 
 
-            media.Add(new InputMediaPhoto(new InputMedia(streams[0], "sd")));
-            media.Add(new InputMediaPhoto(new InputMedia(streams[1], "fg")));
+            //media.Add(new InputMediaPhoto(new InputMedia(streams[0], "sd")));
+            //media.Add(new InputMediaPhoto(new InputMedia(streams[1], "fg")));
 
-            await client.SendTextMessageAsync(chatId, output);
+            //await client.SendTextMessageAsync(chatId, output);
 
-            await client.SendMediaGroupAsync(chatId,media);
+            //await client.SendMediaGroupAsync(chatId,media);
 
             //  await client.SendMediaGroupAsync(chatId, (inputMediaPhoto1, inputMediaPhoto2));
 

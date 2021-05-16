@@ -17,8 +17,6 @@ namespace shigetsuCoach_Bot.Models.Commands
 
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
-
-
             using (var context = new MyDbContext())
             {
                 var query = context.Users.Where(u => u.userTelegramId == msg.Chat.Id);
@@ -31,6 +29,7 @@ namespace shigetsuCoach_Bot.Models.Commands
                         makeOrderController.SetPayment();
                         break;
                 }
+
                 if (!isAdded)
                 {
                     MakeOrderController makeOrderController = new MakeOrderController(msg, client);

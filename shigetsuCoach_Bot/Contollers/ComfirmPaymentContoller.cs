@@ -23,7 +23,7 @@ namespace shigetsuCoach_Bot.Contollers
 
         public async void SendShigetsuScreen(Telegram.Bot.Types.File file, long chatId)
         {
-            await client.SendPhotoAsync(ConfigSettings.shigetsuId, file.FileId, replyMarkup:ConfirmButtons(chatId),caption: chatId.ToString());
+            await client.SendPhotoAsync(ConfigSettings.supalapkaId, file.FileId, replyMarkup:ConfirmButtons(chatId),caption: chatId.ToString());
         }
 
         public async void SaveToParticipant(long chatId)
@@ -34,7 +34,6 @@ namespace shigetsuCoach_Bot.Contollers
                 {
                     userTelegramId = chatId
                 };
-
                 context.Participants.Add(participant);
                await context.SaveChangesAsync();
             }

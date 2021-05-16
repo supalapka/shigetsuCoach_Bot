@@ -28,19 +28,18 @@ namespace shigetsuCoach_Bot.Contollers
         public ReviewsController() { }
 
 
-
-        public void SaveRivew(string _review)
+        public async void SaveRivew(string _review)
         {
-            //using (var context = new MyDbContext())
-            //{
-            //    var review = new Review()
-            //    {
-            //        ReviewString = _review,
-            //    };
+            using (var context = new MyDbContext())
+            {
+                var review = new Review()
+                {
+                    ReviewString = _review,
+                };
 
-            //    context.Reviews.Add(review);
-            //    context.SaveChanges();
-            //}
+                context.Reviews.Add(review);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async void SaveUser()
@@ -55,7 +54,7 @@ namespace shigetsuCoach_Bot.Contollers
 
                 };
                 context.Users.Add(user);
-               await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
 

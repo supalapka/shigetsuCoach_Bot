@@ -88,7 +88,7 @@ namespace shigetsuCoach_Bot
 
             if (msg.Type == Telegram.Bot.Types.Enums.MessageType.Contact) // contacts logic
             {
-                await client.SendContactAsync(ConfigSettings.shigetsuId, msg.Contact.PhoneNumber, msg.Contact.FirstName, msg.Contact.LastName);
+                await client.SendContactAsync(ConfigSettings.supalapkaId, msg.Contact.PhoneNumber, msg.Contact.FirstName, msg.Contact.LastName);
                 await client.SendTextMessageAsync(msg.Chat.Id, "Контакт добавлен в список", replyMarkup: new ReplyKeyboardRemove());
                 MakeOrderController makeOrderController = new MakeOrderController(msg, client);
                 makeOrderController.SetPayment();

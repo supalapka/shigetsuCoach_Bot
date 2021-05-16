@@ -18,7 +18,9 @@ namespace shigetsuCoach_Bot.Models.Commands
 
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
-            string messageToSent = "Как проходит коучинг:\nВ дискорде по демке я разбираю твой реплей, говорю твои ошибки, даю советы, задаю вопросы, отвечаю на вопросы.\n";
+            string messageToSent = "Как проходит коучинг:\n\n" +
+                "Ты кидаешь мне в дискорд код, который получил после оплаты, далее уже я тебе пишу на счет реплея.\n" +
+                "Дальше по демке я разбираю твой реплей, говорю твои ошибки, даю советы, задаю вопросы, отвечаю на вопросы.\n";
             await client.SendTextMessageAsync(msg.Chat.Id, messageToSent,replyMarkup: CoachingButtons());
         }
 
