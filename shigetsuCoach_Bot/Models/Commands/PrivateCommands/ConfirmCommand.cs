@@ -17,7 +17,7 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                 Console.WriteLine(chatId);
 
             await client.SendTextMessageAsync(ConfigSettings.supalapkaId, ("Оплата реплея успешна! \n\n" +  //fix
-                "Скиньте данный код " + chatId + " в дискорд Shigetsu0#5979 и далее он уже с вами довогорится о всем"));
+                "Скиньте данный код " + chatId + " в дискорд Shigetsu0#5979 и далее он уже с вами довогорится о всем."));
 
             await client.SendTextMessageAsync(msg.Chat.Id, chatId + " успешно прошел оплату");
         }

@@ -43,6 +43,7 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new CencelCommand());
             commandsList.Add(new ReviewsCommand());
             commandsList.Add(new ConfirmCommand());
+            commandsList.Add(new BootsMenuCommand());
 
             client.StartReceiving();
             client.OnMessage += BotOnMessageReceived;

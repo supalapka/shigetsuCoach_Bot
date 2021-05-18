@@ -41,6 +41,7 @@ namespace shigetsuCoach_Bot.Contollers
                     {
                         InlineKeyboardButton.WithCallbackData("Про shigetsu","about"),
                         InlineKeyboardButton.WithCallbackData("Коучинг","coaching"),
+                        InlineKeyboardButton.WithCallbackData("Буст","boost"),
                     },
                 });
             }
