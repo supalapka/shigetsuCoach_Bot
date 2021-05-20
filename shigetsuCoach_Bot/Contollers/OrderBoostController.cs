@@ -21,7 +21,8 @@ namespace shigetsuCoach_Bot.Contollers
         public  async void GetUserMmr()
         {
             string output = "Введите ваш  текущий рейтинг и желаемый через команду /mmr число1-число2.\n" +
-                "Пример /mmr4700-5300";
+                "Пример /mmr4700-5300\n\n" +
+                "Диапазон от 4000 до 8500.";
             await client.SendTextMessageAsync(msg.Chat.Id, output);
         }
 
