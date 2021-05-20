@@ -44,6 +44,8 @@ namespace shigetsuCoach_Bot
             commandsList.Add(new ReviewsCommand());
             commandsList.Add(new ConfirmCommand());
             commandsList.Add(new BootsMenuCommand());
+            commandsList.Add(new GetMmrCommand());
+            commandsList.Add(new OrderBoostCommandClass1());
 
             client.StartReceiving();
             client.OnMessage += BotOnMessageReceived;

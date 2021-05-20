@@ -21,8 +21,6 @@ namespace shigetsuCoach_Bot.Contollers
         {
             msg = _msg;
             client = _client;
-
-            // SaveReviews("first text review");
         }
 
         public ReviewsController() { }

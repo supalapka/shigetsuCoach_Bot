@@ -16,10 +16,10 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                 string chatId = msg.Text.Remove(0,7); //confirm word skip
                 Console.WriteLine(chatId);
 
-            await client.SendTextMessageAsync(ConfigSettings.supalapkaId, ("Оплата реплея успешна! \n\n" +  //fix
+            await client.SendTextMessageAsync(Convert.ToInt64(chatId), ("Оплата реплея успешна! \n\n" +  //fix
                 "Скиньте данный код " + chatId + " в дискорд Shigetsu0#5979 и далее он уже с вами довогорится о всем."));
 
-            await client.SendTextMessageAsync(msg.Chat.Id, chatId + " успешно прошел оплату");
+            await client.SendTextMessageAsync(ConfigSettings.supalapkaId, chatId + " успешно прошел оплату");
         }
     }
 }

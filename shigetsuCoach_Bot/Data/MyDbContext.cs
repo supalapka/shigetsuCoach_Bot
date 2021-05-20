@@ -13,8 +13,9 @@ namespace shigetsuCoach_Bot.Data
         {
         }
 
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Review> Reviews { get; set; } 
         public DbSet<User> Users { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<BoostParticipant> BoostParticipants { get; set; }
     }
 }
