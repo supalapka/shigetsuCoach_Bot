@@ -1,8 +1,10 @@
 # shigetsuCoach_Bot
 
-This is the telegram bot that would help dota 2 player contact with shigetsu coacher.
+This is the telegram bot that would help dota 2 players to contact with shigetsu.
 
-Planned to make a progress tracker of a player
+Bot describes services
+calculates the price
+automates payment
 
 [Open in telegram](https://t.me/shigetsuCoachBot)
 
