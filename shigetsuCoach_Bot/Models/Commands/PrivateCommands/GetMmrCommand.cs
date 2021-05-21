@@ -1,7 +1,9 @@
 ﻿using shigetsuCoach_Bot.Commands;
+using shigetsuCoach_Bot.Contollers;
 using shigetsuCoach_Bot.Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -19,19 +21,56 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
 
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
-            string exampleCommand = "/mmr4700-5300";
+            string exampleCommand = "/mmr6000-7000";
             if (msg.Text.Length == exampleCommand.Length)
             {
                 string mmr = msg.Text.Remove(0, 4); //mmr skip
                 string finalmmr = msg.Text.Remove(0, 9); //mmrxxxx- skip
-                mmr = mmr.Remove(4);  //delete -xxxx (final mmr)
-                await client.SendTextMessageAsync(msg.Chat.Id, ($"Текущий рейтинг - {mmr}\n" + $"цель - {finalmmr}"), replyMarkup: BoostButtons());
+                string currentmmr = mmr.Remove(4);  //delete -xxxx (final mmr)
+                mmr = currentmmr;
+
+                int intmmr = Convert.ToInt16(mmr);
+                int intfinalmmr = Convert.ToInt16(finalmmr);
+                int price = 0;
+
+                if (intmmr < 6000 || intfinalmmr > 8500 || intmmr >= intfinalmmr)
+                    RequestMmr(msg, client);
+                else
+                {
+                    while(intmmr < intfinalmmr)
+                    {
+                        //if (intmmr > 4000 && intmmr < 4500)
+                        //    price += (int)MmrBoostPrice.from4000to4500;
+                        //else if (intmmr >= 4500 && intmmr < 5000)
+                        //    price += (int)MmrBoostPrice.from4500to5000;
+                        //else if (intmmr >= 5000 && intmmr < 5500)
+                        //    price += (int)MmrBoostPrice.from5000to5500;
+                        //else if (intmmr >= 5500 && intmmr < 6000)
+                        //    price += (int)MmrBoostPrice.from5500to6000;
+                         if (intmmr >= 6000 && intmmr < 6500)
+                            price += (int)MmrBoostPrice.from6000to6500;
+                        else if (intmmr >= 6500 && intmmr < 7000)
+                            price += (int)MmrBoostPrice.from6500to7000;
+                        else if (intmmr >= 7000 && intmmr < 7500)
+                            price += (int)MmrBoostPrice.from7000to7500;
+                        else if (intmmr >= 7500 && intmmr < 8000)
+                            price += (int)MmrBoostPrice.from7500to8000;
+                        else if (intmmr >= 8000 && intmmr < 8500)
+                            price += (int)MmrBoostPrice.from8000to8500;
+
+                        intmmr += 100;
+
+                    }
+
+                    await client.SendTextMessageAsync(msg.Chat.Id, ($"Текущий рейтинг - {mmr}\n" + $"цель - {finalmmr}\n" +
+                        $"Цена - {price} рублей."), replyMarkup: BoostButtons());
+
+
+                }
             }
             else
             {
-                await client.SendTextMessageAsync(msg.Chat.Id, "Некорректно введены данные\n" +
-                    "Диапазон от 4000 до 8500");
-                
+                RequestMmr(msg,client);
             }
         }
 
@@ -43,13 +82,20 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                 {
                     new []
                     {
-                        InlineKeyboardButton.WithCallbackData("Подтвердить"," "),
+                        InlineKeyboardButton.WithCallbackData("Подтвердить","confirmMyMmr"),
                         InlineKeyboardButton.WithCallbackData("Редактировать","orderBoost"),
                     },
                 });
             }
 
             return _inlineKeyboardMarkup;
+        }
+
+        private async void RequestMmr(Message msg, TelegramBotClient client)
+        {
+            await client.SendTextMessageAsync(msg.Chat.Id, "Некорректно введены данные\n" +
+                 "Диапазон от 6000 до 8500\n" +
+                 "Пример /mmr6000-7000");
         }
     }
 }
