@@ -39,14 +39,6 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                 {
                     while(intmmr < intfinalmmr)
                     {
-                        //if (intmmr > 4000 && intmmr < 4500)
-                        //    price += (int)MmrBoostPrice.from4000to4500;
-                        //else if (intmmr >= 4500 && intmmr < 5000)
-                        //    price += (int)MmrBoostPrice.from4500to5000;
-                        //else if (intmmr >= 5000 && intmmr < 5500)
-                        //    price += (int)MmrBoostPrice.from5000to5500;
-                        //else if (intmmr >= 5500 && intmmr < 6000)
-                        //    price += (int)MmrBoostPrice.from5500to6000;
                          if (intmmr >= 6000 && intmmr < 6500)
                             price += (int)MmrBoostPrice.from6000to6500;
                         else if (intmmr >= 6500 && intmmr < 7000)
@@ -63,11 +55,11 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                     }
 
                     await client.SendTextMessageAsync(msg.Chat.Id, ($"Текущий рейтинг - {mmr}\n" + $"цель - {finalmmr}\n" +
-                        $"Цена - {price} рублей."), replyMarkup: BoostButtons());
+                        $"Цена - {price} рублей/{(int)(price/2.7)} гривен"), replyMarkup: BoostButtons());
 
 
                 }
-            }
+            } 
             else
             {
                 RequestMmr(msg,client);
@@ -84,6 +76,7 @@ namespace shigetsuCoach_Bot.Models.Commands.PrivateCommands
                     {
                         InlineKeyboardButton.WithCallbackData("Подтвердить","confirmMyMmr"),
                         InlineKeyboardButton.WithCallbackData("Редактировать","orderBoost"),
+                        InlineKeyboardButton.WithCallbackData("Главное меню","startMenu"),
                     },
                 });
             }

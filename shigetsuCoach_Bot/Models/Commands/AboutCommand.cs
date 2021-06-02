@@ -26,7 +26,6 @@ namespace shigetsuCoach_Bot.Models.Commands
             {
                 await client.SendPhotoAsync(chatId, photo: stream,caption: outPutString);
             }
-           // await client.SendTextMessageAsync(chatId, outPutString);
         }
     }
 }

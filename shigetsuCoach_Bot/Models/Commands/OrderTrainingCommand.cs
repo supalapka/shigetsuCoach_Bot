@@ -17,6 +17,7 @@ namespace shigetsuCoach_Bot.Models.Commands
 
         public override async void ExecuteAsync(Message msg, TelegramBotClient client)
         {
+            isAdded = false;
             using (var context = new MyDbContext())
             {
                 var query = context.Users.Where(u => u.userTelegramId == msg.Chat.Id);
